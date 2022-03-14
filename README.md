@@ -1,6 +1,9 @@
-# face_detection_flutter
+# Flutter Face Detection
 
-A new Flutter project.
+### Face Detection in Mobile App using Python, Flask, NGROK, and Flutter
+
+## Medium
+You can check my <a href="https://agnelselvan.medium.com/face-detection-in-mobile-app-using-python-flask-and-flutter-363cb6d2ab01">medium</a> blog to be more clear regarding this project.
 
 ## Getting Started
 
