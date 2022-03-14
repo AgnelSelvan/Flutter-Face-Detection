@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:face_detection_flutter/painter.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -104,8 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       TextButton(
                           onPressed: () async {
                             final res = await getFaceCoordinate(
-                                File(_selectedImage!.path),
-                                "https://c304-43-241-129-110.ngrok.io/face_detection");
+                                File(_selectedImage!.path), "Your NGROK URL");
                             debugPrint(res.body);
                             final val = jsonDecode(res.body);
                             List<List<int>> data = [];
@@ -154,42 +154,5 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
-  }
-}
-
-class FacePainter extends CustomPainter {
-  final ui.Image image;
-  final List<List<int>> faces;
-  final List<Rect> rects = [];
-
-  FacePainter(this.image, this.faces) {
-    debugPrint("Coordinates $faces");
-
-    for (var i = 0; i < faces.length; i++) {
-      final x = faces[i][0].toDouble();
-      final y = faces[i][1].toDouble();
-      final w = faces[i][2].toDouble();
-      final h = faces[i][3].toDouble();
-      final rect = ui.Rect.fromPoints(ui.Offset(x, y), ui.Offset(x + w, y + h));
-      rects.add(rect);
-    }
-  }
-
-  @override
-  void paint(ui.Canvas canvas, ui.Size size) {
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..color = const ui.Color.fromARGB(255, 255, 0, 0);
-
-    canvas.drawImage(image, Offset.zero, Paint());
-    for (var i = 0; i < faces.length; i++) {
-      canvas.drawRect(rects[i], paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(FacePainter oldDelegate) {
-    return image != oldDelegate.image || faces != oldDelegate.faces;
   }
 }
