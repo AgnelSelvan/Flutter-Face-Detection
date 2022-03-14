@@ -11,7 +11,7 @@ You can check my <a href="https://agnelselvan.medium.com/face-detection-in-mobil
 
 * Navigate to *face_reco_python* directory and run
 ```python
-    python3 main.py
+    python3 app.py
 ```
 
 * Please make sure you have ngrok installed if not download it from <a href="https://ngrok.com/download">Officia Website</a>
